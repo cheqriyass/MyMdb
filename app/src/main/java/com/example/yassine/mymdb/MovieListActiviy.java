@@ -63,26 +63,6 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rv = (RecyclerView) findViewById(R.id.moviesRecycler);
-        progressBar = (ProgressBar) findViewById(R.id.main_progress);
-
-        adapter = new PaginationAdapter(this);
-        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        gridLayoutManager = new GridLayoutManager(this, 3);
-
-
-        rv.setLayoutManager(linearLayoutManager);
-        rv.setAdapter(adapter);
-        rv.setItemAnimator(new DefaultItemAnimator());
-
-        setScroll();
-
-
-        movieService = Client.getClient().create(ApiService.class);
-
-        loadFirstPage();
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -95,6 +75,30 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        movieService = Client.getClient().create(ApiService.class);
+        rv = (RecyclerView) findViewById(R.id.moviesRecycler);
+        progressBar = (ProgressBar) findViewById(R.id.main_progress);
+
+        adapter = new PaginationAdapter(this);
+        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        gridLayoutManager = new GridLayoutManager(this, 3);
+
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+
+        rv.setLayoutManager(linearLayoutManager);
+        setScroll();
+        rv.setAdapter(adapter);
+
+
+        loadFirstPage();
+
+
+
     }
 
 
@@ -225,9 +229,9 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
         LinearLayoutManager layoutManager= null;
 
         if (layout == 2)
-            layoutManager = linearLayoutManager;
-        else
             layoutManager = gridLayoutManager;
+        else
+            layoutManager = linearLayoutManager;
 
         rv.addOnScrollListener(new PaginationScrollListener(layoutManager) {
             @Override
@@ -261,38 +265,3 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
 
 
 }
-
-
-
-
-//    private void LoadMovies() {
-//
-//        try {
-//            Client client = new Client();
-//            ApiService api = client.getClient().create(ApiService.class);
-//
-//            Call<MoviesResponse> call = api.getPopularMovies(apiKey, "fr_FR", 1);
-//
-//            call.enqueue(new Callback<MoviesResponse>() {
-//                @Override
-//                public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-//                    List<Movie> movies = response.body().getResults();
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(retroActivity));
-//                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                    movieAdapter = new MovieAdapter(context, movies);
-//                    recyclerView.setAdapter(movieAdapter);
-//                }
-//
-//                @Override
-//                public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                    Log.d("ERROR", t.getMessage());
-//                    Toast.makeText(MovieListActiviy.this, "oups", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
