@@ -63,7 +63,7 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        layout = 0;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -168,8 +168,10 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
 
     //**********************************************************************************
 
-    private void loadFirstPage() {
+    private void
+    loadFirstPage() {
         Log.d(TAG, "loadFirstPage: ");
+
 
         callPopularMoviesApi().enqueue(new Callback<MoviesResponse>() {
             @Override
