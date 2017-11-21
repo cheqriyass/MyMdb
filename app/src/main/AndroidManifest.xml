@@ -9,22 +9,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme"
-        android:supportsRtl="true">
-        <!--android:theme="@style/AppTheme"-->
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".MovieDetails"
-            android:label="Details"/>
+        <!-- android:theme="@style/AppTheme" -->
 
-        <activity android:name=".MovieListActiviy"
-            android:label="Popular movies"
+        <activity android:name=".MovieDetails"/>
+        <activity
+            android:name=".MovieListActiviy"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

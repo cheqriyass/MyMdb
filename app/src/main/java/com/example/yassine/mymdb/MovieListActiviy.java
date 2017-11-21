@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.yassine.mymdb.Utils.PaginationScrollListener;
-import com.example.yassine.mymdb.Utils.Utils;
 import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.Movie;
@@ -63,8 +62,6 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Utils.readList();
 
         layout = 0;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -160,7 +157,8 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
         } else if (id == R.id.tvshows) {
 
         } else if (id == R.id.about) {
-
+            Intent movieIntent = new Intent(this, AboutActivity.class);
+            startActivity(movieIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
