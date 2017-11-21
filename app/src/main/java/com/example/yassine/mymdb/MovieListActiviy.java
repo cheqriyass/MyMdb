@@ -6,11 +6,13 @@ import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,13 +61,13 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.movies_list);
+        setContentView(R.layout.activity_main);
 
         rv = (RecyclerView) findViewById(R.id.moviesRecycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
         adapter = new PaginationAdapter(this);
-
+        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new GridLayoutManager(this, 3);
 
@@ -81,6 +83,18 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
 
         loadFirstPage();
 
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
 
@@ -115,7 +129,6 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
                 rv.setLayoutManager(gridLayoutManager);
             }
             else {
-                rv.addItemDecoration(new SimpleDividerItemDecoration(this));
                 rv.setLayoutManager(linearLayoutManager);
             }
             setScroll();
