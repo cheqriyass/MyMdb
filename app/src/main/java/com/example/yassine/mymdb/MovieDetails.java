@@ -10,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.yassine.mymdb.Utils.Utils;
 import com.example.yassine.mymdb.models.Movie;
 
 public class MovieDetails extends AppCompatActivity {
 
-
-    boolean isEnable = false;
-
+    private Movie movie;
+    private boolean isEnable = false;
+    ImageButton ButtonStar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,8 @@ public class MovieDetails extends AppCompatActivity {
         setContentView(R.layout.activity_movie_details);
 
         Intent i = getIntent();
-        Movie movie = (Movie) i.getSerializableExtra("movie");
+        movie = (Movie) i.getSerializableExtra("movie");
+        ButtonStar = (ImageButton) findViewById(R.id.favorite);
 
         TextView movie_title = (TextView) findViewById(R.id.movie_title);;
         TextView movie_desc = (TextView) findViewById(R.id.movie_desc);
@@ -35,14 +37,27 @@ public class MovieDetails extends AppCompatActivity {
 
         String poster = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
 
-        final ImageButton ButtonStar = (ImageButton) findViewById(R.id.favorite);
+
+        if (Utils.list.contains(movie.getId())) {
+            isEnable = true;
+        } else {
+            isEnable = false;
+        }
+
+        loadIcon();
+
+
         ButtonStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isEnable){
-                    ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_favorite_border_black_24dp));
+                    Utils.list.remove(movie.getId());
+                    Utils.saveList();
+                    ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
-                    ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_favorite_black_24dp));
+                    Utils.list.add(movie.getId());
+                    Utils.saveList();
+                    ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_black_24dp));
                 }
                 isEnable = !isEnable;
             }
@@ -55,4 +70,17 @@ public class MovieDetails extends AppCompatActivity {
                 .into(thumbnail);
 
     }
+
+
+    public void loadIcon() {
+        if (isEnable) {
+            ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_black_24dp));
+        } else {
+            ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
+        }
+    }
+
+
+
+
 }
