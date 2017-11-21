@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MyMdb</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="movies">Movies</string>
+    <string name="tvshows">TV Shows</string>
+    <string name="about">About</string>
+    <string name="api_key">45fa97bb1a56497c117f5a249170e9af</string>
+    <string name="title_activity_movie_details">MovieDetails</string>
+
+</resources>
