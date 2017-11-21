@@ -5,6 +5,7 @@ package com.example.yassine.mymdb;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.yassine.mymdb.models.ItemClickListener;
@@ -87,9 +87,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        Movie movie = moviesList.get(position); // Movie
-
-
+        final Movie movie = moviesList.get(position); // Movie
 
         switch (getItemViewType(position)) {
             case ITEM:
@@ -98,13 +96,17 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 movieVH.setListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int pos) {
-                        Toast.makeText(context, moviesList.get(pos).getTitle(), Toast.LENGTH_SHORT).show();
+
+                        Intent detailsIntent = new Intent(context, MovieDetails.class);
+                        detailsIntent.putExtra("movie", movie);
+                        context.startActivity(detailsIntent);
                     }
                 });
 
                 if (MovieListActiviy.layout != 2){
                     movieVH.movie_title.setText(movie.getTitle());
-                    movieVH.movie_desc.setText("Description: " + movie.getOverview().substring(0,60)+"...");
+                    movieVH.movie_desc.setText("Description: " +
+                            (movie.getOverview().length()>80 ? movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
                 }
 
                 String poster = "https://image.tmdb.org/t/p/w500";
@@ -248,6 +250,8 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
         }
     }
+
+
 
 
 }
