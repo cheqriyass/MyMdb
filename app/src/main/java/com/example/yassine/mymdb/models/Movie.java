@@ -49,7 +49,7 @@ public class Movie implements Serializable {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return "https://image.tmdb.org/t/p/w500" + posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -65,7 +65,7 @@ public class Movie implements Serializable {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return "https://image.tmdb.org/t/p/w500" + backdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {

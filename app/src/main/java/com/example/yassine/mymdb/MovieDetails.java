@@ -39,9 +39,9 @@ public class MovieDetails extends AppCompatActivity {
         ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
 
         movie_title.setText(movie.getTitle());
-        movie_desc.setText("Description: " + movie.getOverview());
+        movie_desc.setText(movie.getOverview());
 
-        String poster = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
+        String poster = movie.getBackdropPath();
 
 
         Cursor res = myDb.getById(movie.getId().toString());

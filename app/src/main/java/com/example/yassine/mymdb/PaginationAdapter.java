@@ -105,20 +105,20 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 if (MovieListActiviy.layout != 2){
                     movieVH.movie_title.setText(movie.getTitle());
-                    movieVH.movie_desc.setText("Description: " +
-                            (movie.getOverview().length()>80 ? movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
+                    movieVH.movie_desc.setText((movie.getOverview().length()>80 ?
+                            movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
                 }
 
-                String poster = "https://image.tmdb.org/t/p/w500";
+                String poster;
                 switch (MovieListActiviy.layout){
                     case 1 :
-                        poster += movie.getBackdropPath();
+                        poster = movie.getBackdropPath();
                         break;
                     case 2 :
-                        poster += movie.getPosterPath();
+                        poster = movie.getPosterPath();
                         break;
                     default:
-                        poster += movie.getPosterPath();
+                        poster = movie.getPosterPath();
                         break;
                 }
 
