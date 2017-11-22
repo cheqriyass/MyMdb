@@ -16,8 +16,9 @@
 
 
     <string-array name="lang">
-        <item>@string/English</item>
         <item>@string/French</item>
+        <item>@string/English</item>
     </string-array>
+    <string name="language">Language</string>
 
 </resources>

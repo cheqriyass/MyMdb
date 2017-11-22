@@ -33,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertData(String id, String title, String description, String poster, String posterLarge) {
         SQLiteDatabase db = this.getWritableDatabase();
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+//        onCreate(db);
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1,id);
         contentValues.put(COL_2,title);
@@ -48,14 +50,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME,null);
+        Cursor res = db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE from " + TABLE_NAME,null);
         return res;
     }
 
 
     public Cursor getById(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME + " where ID=" + id,null);
+        Cursor res = db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE from "+TABLE_NAME + " where ID=" + id,null);
         return res;
     }
 

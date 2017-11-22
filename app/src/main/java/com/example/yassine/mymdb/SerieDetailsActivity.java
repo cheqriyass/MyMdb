@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.yassine.mymdb.models.DatabaseHelper;
-import com.example.yassine.mymdb.models.Movie;
+import com.example.yassine.mymdb.models.Serie;
 
 import static android.widget.Toast.makeText;
 
-public class MovieDetails extends AppCompatActivity {
+public class SerieDetailsActivity extends AppCompatActivity {
 
-    private Movie movie;
+    private Serie movie;
     private String language;
     private boolean isEnable = false;
     ImageButton ButtonStar;
@@ -30,7 +30,7 @@ public class MovieDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
+        setContentView(R.layout.activity_serie_details);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
@@ -40,7 +40,7 @@ public class MovieDetails extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        movie = (Movie) i.getSerializableExtra("movie");
+        movie = (Serie) i.getSerializableExtra("movie");
         ButtonStar = (ImageButton) findViewById(R.id.favorite);
 
         TextView movie_title = (TextView) findViewById(R.id.movie_title);
@@ -71,7 +71,7 @@ public class MovieDetails extends AppCompatActivity {
                     if(deletedRows > 0)
                         if (toast!=null)
                             toast.cancel();
-                    toast = Toast.makeText(MovieDetails.this,"Film supprimé des favories",Toast.LENGTH_LONG);
+                    toast = Toast.makeText(SerieDetailsActivity.this,"Film supprimé des favories",Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
@@ -79,11 +79,11 @@ public class MovieDetails extends AppCompatActivity {
                     if(isInserted == true) {
                         if (toast!=null)
                             toast.cancel();
-                        toast = makeText(MovieDetails.this, "Film ajouté au favories", Toast.LENGTH_LONG);
+                        toast = makeText(SerieDetailsActivity.this, "Film ajouté au favories", Toast.LENGTH_LONG);
                     } else {
                         if (toast!=null)
                             toast.cancel();
-                        toast = makeText(MovieDetails.this, "Error", Toast.LENGTH_LONG);
+                        toast = makeText(SerieDetailsActivity.this, "Error", Toast.LENGTH_LONG);
                         return;
                     }
 
@@ -116,3 +116,4 @@ public class MovieDetails extends AppCompatActivity {
 
 
 }
+

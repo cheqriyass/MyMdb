@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable {
+public class Serie implements Serializable {
     @SerializedName("id")
     private Integer id;
 
-    @SerializedName("title")
+    @SerializedName("original_name")
     private String title;
 
     @SerializedName("popularity")
@@ -72,7 +72,7 @@ public class Movie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public Movie(Integer id, String title, String posterPath, String overview, String backdropPath) {
+    public Serie(Integer id, String title, String posterPath, String overview, String backdropPath) {
         this.id = id;
         this.title = title;
         this.posterPath = posterPath;
@@ -80,6 +80,6 @@ public class Movie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public Movie() {
+    public Serie() {
     }
 }

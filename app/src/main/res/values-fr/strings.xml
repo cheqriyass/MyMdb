@@ -8,4 +8,5 @@
     <string name="movies">Films</string>
     <string name="title_activity_movie_details"></string>
     <string name="tvshows">Series</string>
+    <string name="language">Langue</string>
 </resources>

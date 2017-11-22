@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Suleiman on 19/10/16.
  */
 
-public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
+public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
@@ -34,7 +34,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private boolean isLoadingAdded = false;
 
-    public PaginationAdapter(Context context) {
+    public PaginationAdapterMovies(Context context) {
         this.context = context;
         this.moviesList = new ArrayList<>();
     }
@@ -216,7 +216,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
    _________________________________________________________________________________________________
     */
 
-    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView movie_title;
         TextView movie_desc;
         public ImageView thumbnail;
