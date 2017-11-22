@@ -15,7 +15,6 @@ import android.widget.FrameLayout;
 public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
-    Toolbar toolbar;
     FrameLayout frameLayout;
     NavigationView navigationView;
 

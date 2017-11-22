@@ -13,14 +13,14 @@
         <item
             android:id="@+id/favories"
             android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="Favories" />
+            android:title="@string/favorites" />
 
     </group>
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
     <item
         android:id="@+id/about"

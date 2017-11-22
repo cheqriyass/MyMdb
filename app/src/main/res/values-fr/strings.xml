@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyMdb</string>
+    <string name="app_name">myMdb</string>
     <string name="English">Anglais</string>
-    <string name="French">Francais</string>
+    <string name="French">Français</string>
     <string name="about">À propos</string>
     <string name="action_settings">Paramètres</string>
     <string name="movies">Films</string>
-    <string name="title_activity_movie_details"></string>
     <string name="tvshows">Series</string>
     <string name="language">Langue</string>
+    <string name="added_to_favs">Ajouté aux favories</string>
+    <string name="deleted_from_favs">Supprimé des favories</string>
+    <string name="settings">Paramètres</string>
+    <string name="favorites">Favoris</string>
+    <string name="movie_details">Détails du film</string>
 </resources>

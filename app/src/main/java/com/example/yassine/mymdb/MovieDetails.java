@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,7 +17,7 @@ import com.example.yassine.mymdb.models.Movie;
 
 import static android.widget.Toast.makeText;
 
-public class MovieDetails extends AppCompatActivity {
+public class MovieDetails extends BaseDrawerActivity {
 
     private Movie movie;
     private String language;
@@ -30,7 +29,8 @@ public class MovieDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
+        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
+        setTitle(getString(R.string.movie_details));
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
@@ -71,7 +71,7 @@ public class MovieDetails extends AppCompatActivity {
                     if(deletedRows > 0)
                         if (toast!=null)
                             toast.cancel();
-                    toast = Toast.makeText(MovieDetails.this,"Film supprimé des favories",Toast.LENGTH_LONG);
+                    toast = Toast.makeText(MovieDetails.this,getString(R.string.deleted_from_favs),Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
@@ -79,11 +79,8 @@ public class MovieDetails extends AppCompatActivity {
                     if(isInserted == true) {
                         if (toast!=null)
                             toast.cancel();
-                        toast = makeText(MovieDetails.this, "Film ajouté au favories", Toast.LENGTH_LONG);
+                        toast = makeText(MovieDetails.this, getString(R.string.added_to_favs), Toast.LENGTH_LONG);
                     } else {
-                        if (toast!=null)
-                            toast.cancel();
-                        toast = makeText(MovieDetails.this, "Error", Toast.LENGTH_LONG);
                         return;
                     }
 

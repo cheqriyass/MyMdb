@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,7 +17,7 @@ import com.example.yassine.mymdb.models.Serie;
 
 import static android.widget.Toast.makeText;
 
-public class SerieDetailsActivity extends AppCompatActivity {
+public class SerieDetailsActivity extends BaseDrawerActivity {
 
     private Serie movie;
     private String language;
@@ -30,7 +29,8 @@ public class SerieDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_serie_details);
+        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
+        setTitle(getString(R.string.movie_details));
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);

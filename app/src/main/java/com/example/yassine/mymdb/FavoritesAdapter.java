@@ -14,10 +14,6 @@ import com.example.yassine.mymdb.models.Movie;
 
 import java.util.List;
 
-/**
- * Created by Yassine on 22/11/2017.
- */
-
 public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 
 

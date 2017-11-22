@@ -1,8 +1,10 @@
 package com.example.yassine.mymdb;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -85,10 +87,14 @@ public class SettingsActivity extends BaseDrawerActivity {
     }
 
 
-//    @Override
-//    public void onBackPressed() {
-//        startActivity(new Intent(this, MoviesActivity.class));
-//    }
-//
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            startActivity(new Intent(this, MoviesActivity.class));
+        }
+    }
+
 
 }
