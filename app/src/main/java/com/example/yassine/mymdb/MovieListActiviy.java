@@ -1,6 +1,7 @@
 package com.example.yassine.mymdb;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -62,6 +63,9 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        language = pref.getString("lang", null);
 
         layout = 0;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -152,13 +156,19 @@ public class MovieListActiviy extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         if (id == R.id.movies) {
-            Intent movieIntent = new Intent(this, MovieListActiviy.class);
-            startActivity(movieIntent);
+            Intent intent = new Intent(this, MovieListActiviy.class);
+            startActivity(intent);
         } else if (id == R.id.tvshows) {
 
         } else if (id == R.id.about) {
-            Intent movieIntent = new Intent(this, AboutActivity.class);
-            startActivity(movieIntent);
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.favories) {
+            Intent intent = new Intent(this, FavoriesActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

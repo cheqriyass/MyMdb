@@ -17,5 +17,4 @@ public interface ApiService {
                                           @Query("language") String language,
                                           @Query("page") int pageIndex);
 
-
 }

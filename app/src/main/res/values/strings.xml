@@ -11,5 +11,13 @@
     <string name="about">About</string>
     <string name="api_key">45fa97bb1a56497c117f5a249170e9af</string>
     <string name="title_activity_movie_details">MovieDetails</string>
+    <string name="English">English</string>
+    <string name="French">French</string>
+
+
+    <string-array name="lang">
+        <item>@string/English</item>
+        <item>@string/French</item>
+    </string-array>
 
 </resources>

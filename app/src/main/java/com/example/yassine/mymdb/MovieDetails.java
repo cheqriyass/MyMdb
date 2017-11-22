@@ -1,6 +1,7 @@
 package com.example.yassine.mymdb;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import static android.widget.Toast.makeText;
 public class MovieDetails extends AppCompatActivity {
 
     private Movie movie;
+    private String language;
     private boolean isEnable = false;
     ImageButton ButtonStar;
     DatabaseHelper myDb;
@@ -29,6 +31,11 @@ public class MovieDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        language = pref.getString("lang", null);
+
+
         myDb = new DatabaseHelper(this);
         Intent i = getIntent();
         movie = (Movie) i.getSerializableExtra("movie");

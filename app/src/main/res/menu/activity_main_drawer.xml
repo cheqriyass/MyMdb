@@ -17,18 +17,14 @@
 
     </group>
 
-    <item android:title=" ">
-        <menu>
-            <item
-                android:id="@+id/settings"
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Settings" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
 
-            <item
-                android:id="@+id/about"
-                android:icon="@drawable/ic_info_outline_black_24dp"
-                android:title="@string/about" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="@string/about" />
 
 </menu>

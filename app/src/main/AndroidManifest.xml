@@ -14,7 +14,7 @@
 
         <!-- android:theme="@style/AppTheme" -->
 
-        <activity android:name=".MovieDetails"/>
+        <activity android:name=".MovieDetails" />
         <activity
             android:name=".MovieListActiviy"
             android:theme="@style/AppTheme.NoActionBar">
@@ -24,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FavoriesActivity"></activity>
+
     </application>
 
 </manifest>
