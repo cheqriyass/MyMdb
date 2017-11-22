@@ -37,6 +37,8 @@ public class MovieDetails extends AppCompatActivity {
 
 
         myDb = new DatabaseHelper(this);
+
+
         Intent i = getIntent();
         movie = (Movie) i.getSerializableExtra("movie");
         ButtonStar = (ImageButton) findViewById(R.id.favorite);
@@ -72,11 +74,17 @@ public class MovieDetails extends AppCompatActivity {
                     toast = Toast.makeText(MovieDetails.this,"Film supprimé des favories",Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
-                    boolean isInserted = myDb.insertData(movie.getId().toString());
+                    boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
+                            movie.getPosterPath().toString(), movie.getBackdropPath().toString());
                     if(isInserted == true) {
                         if (toast!=null)
                             toast.cancel();
                         toast = makeText(MovieDetails.this, "Film ajouté au favories", Toast.LENGTH_LONG);
+                    } else {
+                        if (toast!=null)
+                            toast.cancel();
+                        toast = makeText(MovieDetails.this, "Error", Toast.LENGTH_LONG);
+                        return;
                     }
 
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_black_24dp));

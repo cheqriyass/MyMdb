@@ -1,16 +1,15 @@
 package com.example.yassine.mymdb;
 
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.yassine.mymdb.models.DatabaseHelper;
 
 public class FavoriesActivity extends AppCompatActivity {
 
     private DatabaseHelper myDb;
-    private String language = "fr_FR";
 
 
     @Override
@@ -20,10 +19,9 @@ public class FavoriesActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
         Cursor res = myDb.getAllData();
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        language = pref.getString("lang", null);
 
         while(res.moveToNext()){
+            Log.v("movie", res.getString(0) + " " + res.getString(1));
 
         }
 

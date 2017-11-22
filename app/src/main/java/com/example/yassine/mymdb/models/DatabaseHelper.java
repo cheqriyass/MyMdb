@@ -6,14 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by ProgrammingKnowledge on 4/3/2015.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "favories.db";
     public static final String TABLE_NAME = "favories_table";
     public static final String COL_1 = "ID";
-
+    public static final String COL_2 = "TITLE";
+    public static final String COL_3 = "DESC";
+    public static final String COL_4 = "POSTER";
+    public static final String COL_5 = "POSTERLARGE";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -21,7 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY, TITLE TEXT, DESC TEXT," +
+                " POSTER TEXT, POSTERLARGE TEXT)");
     }
 
     @Override
@@ -30,10 +31,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String id) {
+    public boolean insertData(String id, String title, String description, String poster, String posterLarge) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1,id);
+        contentValues.put(COL_2,title);
+        contentValues.put(COL_3,description);
+        contentValues.put(COL_4,poster);
+        contentValues.put(COL_5,posterLarge);
         long result = db.insert(TABLE_NAME, null ,contentValues);
         if(result == -1)
             return false;
