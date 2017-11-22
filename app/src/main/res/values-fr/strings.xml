@@ -13,4 +13,7 @@
     <string name="settings">Paramètres</string>
     <string name="favorites">Favoris</string>
     <string name="movie_details">Détails du film</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="api_key">45fa97bb1a56497c117f5a249170e9af</string>
 </resources>
