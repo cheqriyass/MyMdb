@@ -1,8 +1,5 @@
 package com.example.yassine.mymdb;
 
-/**
- * Created by Yassine on 20/11/2017.
- */
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +18,6 @@ import com.example.yassine.mymdb.models.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suleiman on 19/10/16.
- */
 
 public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
 
