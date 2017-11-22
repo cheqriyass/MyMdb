@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +21,7 @@ import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.Serie;
 import com.example.yassine.mymdb.models.SeriesResponse;
-import com.example.yassine.mymdb.models.SimpleDividerItemDecoration;
+import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeriesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class SeriesActivity extends BaseDrawerActivity{
     public static int layout = 0;
     private static final String TAG = "MainActivity";
     private static String language = "fr_FR";
@@ -59,7 +57,8 @@ public class SeriesActivity extends AppCompatActivity implements NavigationView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_series);
+        getLayoutInflater().inflate(R.layout.movies_list, frameLayout);
+        setTitle(getString(R.string.tvshows));
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
@@ -140,7 +139,7 @@ public class SeriesActivity extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.movies) {
-            Intent intent = new Intent(this, MovieListActiviy.class);
+            Intent intent = new Intent(this, MoviesActivity.class);
             startActivity(intent);
         } else if (id == R.id.tvshows) {
             Intent intent = new Intent(this, SeriesActivity.class);

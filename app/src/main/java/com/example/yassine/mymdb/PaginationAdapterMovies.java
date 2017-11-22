@@ -68,7 +68,7 @@ public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.V
     private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
         RecyclerView.ViewHolder viewHolder;
         View v = null;
-        switch (MovieListActiviy.layout){
+        switch (MoviesActivity.layout){
             case 1 :
                 v = inflater.inflate(R.layout.movie_list_item_2, parent, false);
                 break;
@@ -103,14 +103,14 @@ public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.V
                     }
                 });
 
-                if (MovieListActiviy.layout != 2){
+                if (MoviesActivity.layout != 2){
                     movieVH.movie_title.setText(movie.getTitle());
                     movieVH.movie_desc.setText((movie.getOverview().length()>80 ?
                             movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
                 }
 
                 String poster;
-                switch (MovieListActiviy.layout){
+                switch (MoviesActivity.layout){
                     case 1 :
                         poster = movie.getBackdropPath();
                         break;
@@ -226,7 +226,7 @@ public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.V
             super(itemView);
             itemView.setOnClickListener(this);
             this.thumbnail = itemView.findViewById(R.id.thumbnail);
-            if (MovieListActiviy.layout != 2){
+            if (MoviesActivity.layout != 2){
                 this.movie_title = itemView.findViewById(R.id.movie_title);
                 this.movie_desc = itemView.findViewById(R.id.movie_desc);
             }

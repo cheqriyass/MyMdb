@@ -2,7 +2,6 @@ package com.example.yassine.mymdb;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,12 +9,12 @@ import android.util.Log;
 
 import com.example.yassine.mymdb.models.DatabaseHelper;
 import com.example.yassine.mymdb.models.Movie;
-import com.example.yassine.mymdb.models.SimpleDividerItemDecoration;
+import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriesActivity extends AppCompatActivity {
+public class FavoriesActivity extends BaseDrawerActivity {
 
     private DatabaseHelper myDb;
     private RecyclerView rv;
@@ -24,7 +23,9 @@ public class FavoriesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favories);
+        getLayoutInflater().inflate(R.layout.activity_favories, frameLayout);
+        setTitle(getString(R.string.favorites));
+
         myDb = new DatabaseHelper(this);
         Cursor res = myDb.getAllData();
         rv = (RecyclerView) findViewById(R.id.favoritesRecycler);

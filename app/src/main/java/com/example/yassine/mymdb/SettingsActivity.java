@@ -1,10 +1,8 @@
 package com.example.yassine.mymdb;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -14,14 +12,15 @@ import java.util.Locale;
 
 import static com.example.yassine.mymdb.R.id.spinner1;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseDrawerActivity {
 
     private Spinner spinner;
     private boolean firstLaunch = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        getLayoutInflater().inflate(R.layout.activity_settings, frameLayout);
+        setTitle(getString(R.string.settings));
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
@@ -86,10 +85,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, MovieListActiviy.class));
-    }
-
+//    @Override
+//    public void onBackPressed() {
+//        startActivity(new Intent(this, MoviesActivity.class));
+//    }
+//
 
 }

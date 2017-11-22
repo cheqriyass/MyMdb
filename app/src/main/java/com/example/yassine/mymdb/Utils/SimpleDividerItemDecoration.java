@@ -1,4 +1,4 @@
-package com.example.yassine.mymdb.models;
+package com.example.yassine.mymdb.Utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.yassine.mymdb.MovieListActiviy;
+import com.example.yassine.mymdb.MoviesActivity;
 import com.example.yassine.mymdb.R;
 
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
@@ -20,7 +20,7 @@ public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
 
-        if (MovieListActiviy.layout == 2)
+        if (MoviesActivity.layout == 2)
             return;
         int left = parent.getPaddingLeft();
         int right = parent.getWidth() - parent.getPaddingRight();

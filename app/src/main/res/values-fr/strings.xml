@@ -3,7 +3,7 @@
     <string name="app_name">MyMdb</string>
     <string name="English">Anglais</string>
     <string name="French">Francais</string>
-    <string name="about">A propos</string>
+    <string name="about">À propos</string>
     <string name="action_settings">Paramètres</string>
     <string name="movies">Films</string>
     <string name="title_activity_movie_details"></string>
