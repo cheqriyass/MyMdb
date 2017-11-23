@@ -32,7 +32,11 @@ public class SettingsActivity extends BaseDrawerActivity {
         String language = pref.getString("lang", null);
         String qual = pref.getString("quality", null);
 
-
+        if (qual == null) {
+            qual = "w300";
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("quality", qual).apply();
+        }
 
         langSpinner = (Spinner) findViewById(R.id.lang_spinner);
         qualSpinner = (Spinner) findViewById(R.id.qual_spinner);
