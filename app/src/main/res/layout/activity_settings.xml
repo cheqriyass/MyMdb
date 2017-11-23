@@ -31,22 +31,24 @@
 
     <Spinner
         android:id="@+id/lang_spinner"
-        android:layout_width="209dp"
-        android:layout_height="27dp"
+        android:layout_width="178dp"
+        android:layout_height="31dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="30dp"
         android:entries="@array/lang"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="190dp" />
 
     <Spinner
         android:id="@+id/qual_spinner"
-        android:layout_width="210dp"
+        android:layout_width="178dp"
         android:layout_height="28dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="97dp"
         android:entries="@array/image_qualities"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="190dp" />
 
 </android.support.constraint.ConstraintLayout>

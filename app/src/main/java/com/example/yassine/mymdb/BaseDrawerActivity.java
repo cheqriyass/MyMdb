@@ -1,6 +1,10 @@
 package com.example.yassine.mymdb;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -12,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import java.util.Locale;
+
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -19,12 +25,14 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
     NavigationView navigationView;
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
+        setLocal();
         super.setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,5 +87,29 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    void setLocal(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String language = pref.getString("lang", null);
+
+        Locale locale = null;
+
+        switch (language){
+            case "fr-FR":
+                locale = new Locale("fr");
+                break;
+            default:
+                locale = new Locale("en");
+        }
+
+
+
+
+        Resources res = context.getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+        config.locale = locale;
+        res.updateConfiguration(config, res.getDisplayMetrics());
     }
 }

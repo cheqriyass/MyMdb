@@ -1,7 +1,10 @@
 package com.example.yassine.mymdb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
@@ -9,18 +12,22 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class SettingsActivity extends BaseDrawerActivity {
 
     private Spinner langSpinner;
     private Spinner qualSpinner;
     private boolean firstLaunch = true;
     private boolean firstLaunchQual = true;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_settings, frameLayout);
         setTitle(getString(R.string.settings));
-
+        context = this;
+        getLayoutInflater().inflate(R.layout.activity_settings, frameLayout);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
         String qual = pref.getString("quality", null);
@@ -55,22 +62,37 @@ public class SettingsActivity extends BaseDrawerActivity {
 
                 String lang = parentView.getItemAtPosition(position).toString();
 
+
+                Locale locale = null;
+
                 switch (lang){
                     case "French":
                     case "Français":
                         editor.putString("lang", "fr-FR").apply();
+                        locale = new Locale("fr");
                         break;
                     default:
+                        locale = new Locale("en");
                         editor.putString("lang", "en-US").apply();
                 }
 
+                Resources res = context.getResources();
+                Configuration config = new Configuration(res.getConfiguration());
+                config.locale = locale;
+                res.updateConfiguration(config, res.getDisplayMetrics());
 
-                if (!firstLaunch)
-                     Toast.makeText(SettingsActivity.this,
+
+                if (!firstLaunch) {
+                    Toast.makeText(SettingsActivity.this,
                             parentView.getItemAtPosition(position).toString(),
                             Toast.LENGTH_SHORT).show();
-
+                    Intent refresh = new Intent(context, SettingsActivity.class);
+                    startActivity(refresh);
+                    finish();
+                }
                 firstLaunch = false;
+
+
             }
 
             @Override
