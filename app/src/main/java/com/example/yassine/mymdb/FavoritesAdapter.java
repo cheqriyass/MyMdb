@@ -14,13 +14,11 @@ import com.example.yassine.mymdb.models.Movie;
 
 import java.util.List;
 
-public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private List<Movie> moviesList;
     private Context context;
-
-    private boolean isLoadingAdded = false;
 
     public FavoritesAdapter(Context context, List<Movie> movies) {
         this.context = context;
@@ -49,7 +47,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         vh.movie_desc.setText((movie.getOverview().length()>80 ?
                 movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
 
-        String poster = movie.getPosterPath();
+        String poster = movie.getPosterPath(context);
 
         Glide.with(context)
                 .load(poster)
@@ -73,9 +71,4 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return moviesList == null ? 0 : moviesList.size();
     }
 
-
-    @Override
-    public void onClick(View view) {
-
-    }
 }

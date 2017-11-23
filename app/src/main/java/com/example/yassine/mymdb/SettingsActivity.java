@@ -2,7 +2,6 @@ package com.example.yassine.mymdb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
@@ -10,14 +9,12 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Locale;
-
-import static com.example.yassine.mymdb.R.id.spinner1;
-
 public class SettingsActivity extends BaseDrawerActivity {
 
-    private Spinner spinner;
+    private Spinner langSpinner;
+    private Spinner qualSpinner;
     private boolean firstLaunch = true;
+    private boolean firstLaunchQual = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,18 +23,30 @@ public class SettingsActivity extends BaseDrawerActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
+        String qual = pref.getString("quality", null);
 
 
 
-        spinner = (Spinner) findViewById(spinner1);
+        langSpinner = (Spinner) findViewById(R.id.lang_spinner);
+        qualSpinner = (Spinner) findViewById(R.id.qual_spinner);
 
 
         if (language=="fr-FR")
-            spinner.setSelection(0);
+            langSpinner.setSelection(0);
         else
-            spinner.setSelection(1);
+            langSpinner.setSelection(1);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        if (qual == "original")
+            qualSpinner.setSelection(0);
+        else if (qual == "w780")
+            qualSpinner.setSelection(1);
+        else
+            qualSpinner.setSelection(2);
+
+
+
+        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
@@ -45,26 +54,16 @@ public class SettingsActivity extends BaseDrawerActivity {
 
 
                 String lang = parentView.getItemAtPosition(position).toString();
-                Locale locale;
-                Configuration config;
 
                 switch (lang){
                     case "French":
-                    case "Francais":
+                    case "Français":
                         editor.putString("lang", "fr-FR").apply();
-//                        locale = new Locale("fr-FR");
-//                        Locale.setDefault(locale);
                         break;
                     default:
                         editor.putString("lang", "en-US").apply();
-//                        locale = new Locale("en-US");
-//                        Locale.setDefault(locale);
                 }
 
-//                config = new Configuration();
-//                config.locale = locale;
-//                Resources resources = getResources();
-//                resources.updateConfiguration(config, resources.getDisplayMetrics());
 
                 if (!firstLaunch)
                      Toast.makeText(SettingsActivity.this,
@@ -81,6 +80,34 @@ public class SettingsActivity extends BaseDrawerActivity {
 
         });
 
+
+        qualSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                SharedPreferences.Editor editor = pref.edit();
+
+
+                String quality = parentView.getItemAtPosition(position).toString();
+
+                editor.putString("quality", quality).apply();
+
+
+
+                if (!firstLaunchQual)
+                    Toast.makeText(SettingsActivity.this,
+                            parentView.getItemAtPosition(position).toString(),
+                            Toast.LENGTH_SHORT).show();
+
+                firstLaunchQual = false;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
 
 
 

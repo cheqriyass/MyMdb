@@ -35,7 +35,7 @@ public class FavoriesActivity extends BaseDrawerActivity {
         while(res.moveToNext()){
             Log.v("movie", res.getString(0) + " " + res.getString(1));
             Movie m = new Movie(Integer.parseInt(res.getString(0)), res.getString(1),
-                    res.getString(3), res.getString(2), res.getString(4));
+                    res.getString(3), res.getString(2), res.getString(4), Double.parseDouble(res.getString(5)));
             movies.add(m);
         }
 

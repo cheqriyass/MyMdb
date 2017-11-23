@@ -89,22 +89,6 @@ public class SeriesActivity extends BaseDrawerActivity{
     }
 
 
-
-
-
-    //***********************************************************************************
-
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -135,7 +119,6 @@ public class SeriesActivity extends BaseDrawerActivity{
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.movies) {
@@ -161,7 +144,6 @@ public class SeriesActivity extends BaseDrawerActivity{
     }
 
 
-    //**********************************************************************************
 
     private void
     loadFirstPage() {
@@ -171,8 +153,6 @@ public class SeriesActivity extends BaseDrawerActivity{
         callPopularSeriesApi().enqueue(new Callback<SeriesResponse>() {
             @Override
             public void onResponse(Call<SeriesResponse> call, Response<SeriesResponse> response) {
-                // Got data. Send it to adapter
-
                 List<Serie> results = response.body().getResults();
                 progressBar.setVisibility(View.GONE);
                 adapter.addAll(results);

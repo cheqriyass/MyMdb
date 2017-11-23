@@ -6,7 +6,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="movies">Movies</string>
     <string name="tvshows">TV Shows</string>
     <string name="about">About</string>
     <string name="favorites">Favorites</string>
@@ -20,9 +19,21 @@
         <item>@string/French</item>
         <item>@string/English</item>
     </string-array>
+
+
+    <string-array name="image_qualities">
+        <item>original</item>
+        <item>w780</item>
+        <item>w300</item>
+    </string-array>
+
+
     <string name="language">Language</string>
     <string name="added_to_favs">Added to favorites</string>
     <string name="deleted_from_favs">Removed from favorites</string>
     <string name="movie_details">Movie details</string>
+    <string name="image_quality">Image quality</string>
+    <string name="movies">Movies</string>
+    <string name="search">Search</string>
 
 </resources>

@@ -45,12 +45,14 @@ public class MovieDetails extends BaseDrawerActivity {
 
         TextView movie_title = (TextView) findViewById(R.id.movie_title);
         TextView movie_desc = (TextView) findViewById(R.id.movie_desc);
+        TextView rating = (TextView) findViewById(R.id.rating);
         ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
 
         movie_title.setText(movie.getTitle());
         movie_desc.setText(movie.getOverview());
+        rating.setText("Rating: " + Double.toString(movie.getVoteAverage()));
 
-        final String poster = movie.getBackdropPath();
+        final String poster = movie.getBackdropPath(this);
 
 
         Cursor res = myDb.getById(movie.getId().toString());
@@ -75,7 +77,7 @@ public class MovieDetails extends BaseDrawerActivity {
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
-                            movie.posterPath, movie.backdropPath);
+                            movie.posterPath, movie.backdropPath, movie.getVoteAverage());
                     if(isInserted == true) {
                         if (toast!=null)
                             toast.cancel();

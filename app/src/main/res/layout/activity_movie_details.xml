@@ -43,8 +43,15 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="#00ffffff"
-                android:onClick="onToggleStar"
                 android:src="@drawable/ic_favorite_border_black_24dp" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Rating : " />
 
             <TextView
                 android:id="@+id/movie_title"

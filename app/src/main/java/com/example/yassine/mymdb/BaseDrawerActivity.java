@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
@@ -51,28 +53,29 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //to prevent current item select over and over
         if (item.isChecked()){
             drawerLayout.closeDrawer(GravityCompat.START);
             return false;
         }
 
+        Intent intent;
         if (id == R.id.movies) {
-            Intent intent = new Intent(this, MoviesActivity.class);
-            startActivity(intent);
+             intent = new Intent(this, MoviesActivity.class);
         } else if (id == R.id.tvshows) {
-            Intent intent = new Intent(this, SeriesActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, SeriesActivity.class);
         } else if (id == R.id.about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, AboutActivity.class);
         } else if (id == R.id.settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.favories) {
-            Intent intent = new Intent(this, FavoriesActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, SettingsActivity.class);
+        } else if (id == R.id.search) {
+            intent = new Intent(this, SearchActivity.class);
+        } else { // favorites
+            intent = new Intent(this, FavoriesActivity.class);
         }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

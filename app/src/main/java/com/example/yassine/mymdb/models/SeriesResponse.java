@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Yassine on 15/11/2017.
- */
-
 public class SeriesResponse {
     @SerializedName("page")
     private Integer page;

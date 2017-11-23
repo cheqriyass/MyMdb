@@ -11,12 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!-- android:theme="@style/AppTheme" -->
-
-        <activity android:name=".MovieDetails"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".MovieDetails"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MoviesActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,25 +23,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".FavoriesActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SeriesActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SerieDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SearchActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
-        </activity>
-
-        <activity android:name=".FavoriesActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity android:name=".SeriesActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-        <activity android:name=".SerieDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

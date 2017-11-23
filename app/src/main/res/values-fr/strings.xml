@@ -16,4 +16,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="api_key">45fa97bb1a56497c117f5a249170e9af</string>
+    <string name="image_quality">Qualité des images</string>
+
+    <string-array name="image_qualities">
+        <item>original</item>
+        <item>w780</item>
+        <item>w300</item>
+    </string-array>
+
+    <string-array name="lang">
+        <item>@string/French</item>
+        <item>@string/English</item>
+    </string-array>
+    <string name="search">chercher</string>
+
+
 </resources>

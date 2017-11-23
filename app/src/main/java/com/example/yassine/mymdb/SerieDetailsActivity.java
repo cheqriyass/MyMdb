@@ -50,7 +50,7 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
         movie_title.setText(movie.getTitle());
         movie_desc.setText(movie.getOverview());
 
-        final String poster = movie.getBackdropPath();
+        final String poster = movie.getBackdropPath(this);
 
 
         Cursor res = myDb.getById(movie.getId().toString());
@@ -75,7 +75,7 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
-                            movie.posterPath, movie.backdropPath);
+                            movie.posterPath, movie.backdropPath, movie.getVoteAverage());
                     if(isInserted == true) {
                         if (toast!=null)
                             toast.cancel();
@@ -98,7 +98,6 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
 
         Glide.with(this)
                 .load(poster)
-                //.placeholder(R.drawable.load)
                 .into(thumbnail);
 
     }

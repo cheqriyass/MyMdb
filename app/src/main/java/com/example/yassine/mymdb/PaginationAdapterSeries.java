@@ -105,26 +105,24 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
                 String poster;
                 switch (SeriesActivity.layout){
                     case 1 :
-                        poster = movie.getBackdropPath();
+                        poster = movie.getBackdropPath(context);
                         break;
                     case 2 :
-                        poster = movie.getPosterPath();
+                        poster = movie.getPosterPath(context);
                         break;
                     default:
-                        poster = movie.getPosterPath();
+                        poster = movie.getPosterPath(context);
                         break;
                 }
 
 
                 Glide.with(context)
                         .load(poster)
-                        //.placeholder(R.drawable.load)
                         .into(movieVH.thumbnail);
 
                 break;
 
             case LOADING:
-//                Do nothing
                 break;
         }
 
