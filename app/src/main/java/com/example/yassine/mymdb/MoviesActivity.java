@@ -30,7 +30,7 @@ public class MoviesActivity extends BaseDrawerActivity{
 
     public static int layout = 0;
     private static final String TAG = "MainActivity";
-    private static String language = "fr_FR";
+    private static String language;
 
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
@@ -62,6 +62,8 @@ public class MoviesActivity extends BaseDrawerActivity{
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
+
+
 
         layout = 0;
         movieService = Client.getClient().create(ApiService.class);

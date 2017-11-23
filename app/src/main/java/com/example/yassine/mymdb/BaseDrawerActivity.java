@@ -93,7 +93,8 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     private void setLocal(){
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
-
+        if (language == null)
+            language = "fr-FR";
         Locale locale;
 
         switch (language){
