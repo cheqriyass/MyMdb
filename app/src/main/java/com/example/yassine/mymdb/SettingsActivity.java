@@ -31,15 +31,15 @@ public class SettingsActivity extends BaseDrawerActivity {
         qualSpinner = (Spinner) findViewById(R.id.qual_spinner);
 
 
-        if (language=="fr-FR")
+        if (language.equals("fr-FR"))
             langSpinner.setSelection(0);
         else
             langSpinner.setSelection(1);
 
 
-        if (qual == "original")
+        if (qual.equals("original"))
             qualSpinner.setSelection(0);
-        else if (qual == "w780")
+        else if (qual.equals("w780"))
             qualSpinner.setSelection(1);
         else
             qualSpinner.setSelection(2);
