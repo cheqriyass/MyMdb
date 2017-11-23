@@ -68,10 +68,11 @@ public class SearchActivity extends BaseDrawerActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(searchInput.getText() == null)
-                    return;
-                hideSoftKeyboard(activity);
-                SearchMovie(searchInput.getText().toString());
+                if(searchInput.getText() != null && searchInput.getText().toString().length() > 0){
+                    hideSoftKeyboard(activity);
+                    SearchMovie(searchInput.getText().toString());
+                }
+
             }
         });
     }

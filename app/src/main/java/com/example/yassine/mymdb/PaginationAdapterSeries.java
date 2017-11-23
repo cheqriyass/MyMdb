@@ -60,7 +60,7 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
         RecyclerView.ViewHolder viewHolder;
-        View v = null;
+        View v;
         switch (SeriesActivity.layout){
             case 1 :
                 v = inflater.inflate(R.layout.movie_list_item_2, parent, false);

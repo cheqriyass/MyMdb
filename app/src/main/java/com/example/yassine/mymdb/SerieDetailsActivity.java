@@ -45,20 +45,18 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
 
         TextView movie_title = (TextView) findViewById(R.id.movie_title);
         TextView movie_desc = (TextView) findViewById(R.id.movie_desc);
+        TextView rating = (TextView) findViewById(R.id.rating);
         ImageView thumbnail = (ImageView) findViewById(R.id.thumbnail);
 
         movie_title.setText(movie.getTitle());
         movie_desc.setText(movie.getOverview());
+        rating.setText("Rating: " + Double.toString(movie.getVoteAverage()));
 
         final String poster = movie.getBackdropPath(this);
 
 
         Cursor res = myDb.getById(movie.getId().toString());
-        if(res.getCount() != 0) {
-            isEnable = true;
-        }else {
-            isEnable = false;
-        }
+        isEnable = res.getCount() != 0;
 
         loadIcon();
 
@@ -74,9 +72,9 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
                     toast = Toast.makeText(SerieDetailsActivity.this,"Film supprimé des favories",Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
-                    boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
+                    boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle(), movie.getOverview(),
                             movie.posterPath, movie.backdropPath, movie.getVoteAverage());
-                    if(isInserted == true) {
+                    if(isInserted) {
                         if (toast!=null)
                             toast.cancel();
                         toast = makeText(SerieDetailsActivity.this, "Film ajouté au favories", Toast.LENGTH_LONG);

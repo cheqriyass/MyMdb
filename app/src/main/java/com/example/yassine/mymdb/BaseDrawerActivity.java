@@ -25,7 +25,7 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
     NavigationView navigationView;
-    Context context;
+    private Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,11 +90,11 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     }
 
 
-    void setLocal(){
+    private void setLocal(){
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
 
-        Locale locale = null;
+        Locale locale;
 
         switch (language){
             case "fr-FR":

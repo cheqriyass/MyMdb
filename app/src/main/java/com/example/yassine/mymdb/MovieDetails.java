@@ -56,11 +56,7 @@ public class MovieDetails extends BaseDrawerActivity {
 
 
         Cursor res = myDb.getById(movie.getId().toString());
-        if(res.getCount() != 0) {
-            isEnable = true;
-        }else {
-            isEnable = false;
-        }
+        isEnable = res.getCount() != 0;
 
         loadIcon();
 
@@ -76,9 +72,9 @@ public class MovieDetails extends BaseDrawerActivity {
                     toast = Toast.makeText(MovieDetails.this,getString(R.string.deleted_from_favs),Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
-                    boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle().toString(), movie.getOverview().toString(),
+                    boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle(), movie.getOverview(),
                             movie.posterPath, movie.backdropPath, movie.getVoteAverage());
-                    if(isInserted == true) {
+                    if(isInserted) {
                         if (toast!=null)
                             toast.cancel();
                         toast = makeText(MovieDetails.this, getString(R.string.added_to_favs), Toast.LENGTH_LONG);

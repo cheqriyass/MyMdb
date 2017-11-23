@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "favories.db";
-    public static final String TABLE_NAME = "favories_table";
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "TITLE";
-    public static final String COL_3 = "DESC";
-    public static final String COL_4 = "POSTER";
-    public static final String COL_5 = "POSTERLARGE";
-    public static final String COL_6 = "VOTE_AVERAGE";
+    private static final String DATABASE_NAME = "favories.db";
+    private static final String TABLE_NAME = "favories_table";
+    private static final String COL_1 = "ID";
+    private static final String COL_2 = "TITLE";
+    private static final String COL_3 = "DESC";
+    private static final String COL_4 = "POSTER";
+    private static final String COL_5 = "POSTERLARGE";
+    private static final String COL_6 = "VOTE_AVERAGE";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -42,23 +42,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5,posterLarge);
         contentValues.put(COL_6,vote);
         long result = db.insert(TABLE_NAME, null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
+
     }
 
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE, VOTE_AVERAGE from " + TABLE_NAME,null);
-        return res;
+        return db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE, VOTE_AVERAGE from " + TABLE_NAME,null);
     }
 
 
     public Cursor getById(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE, VOTE_AVERAGE from "+TABLE_NAME + " where ID=" + id,null);
-        return res;
+        return db.rawQuery("select ID, TITLE, DESC, POSTER, POSTERLARGE, VOTE_AVERAGE from "+TABLE_NAME + " where ID=" + id,null);
     }
 
 

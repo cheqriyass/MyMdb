@@ -28,7 +28,8 @@
         <item>@string/French</item>
         <item>@string/English</item>
     </string-array>
-    <string name="search">chercher</string>
+    <string name="search">Chercher</string>
+    <string name="layout">affichage</string>
 
 
 </resources>

@@ -12,11 +12,6 @@ public abstract class PaginationScrollListener extends RecyclerView.OnScrollList
 
     LinearLayoutManager layoutManager;
 
-    /**
-     * Supporting only LinearLayoutManager for now.
-     *
-     * @param layoutManager
-     */
     public PaginationScrollListener(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;
     }

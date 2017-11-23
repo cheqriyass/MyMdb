@@ -22,7 +22,7 @@ public class Movie implements Serializable {
     public String posterPath;
 
     @SerializedName("vote_average")
-    public double voteAverage;
+    private double voteAverage;
 
     @SerializedName("overview")
     private String overview;

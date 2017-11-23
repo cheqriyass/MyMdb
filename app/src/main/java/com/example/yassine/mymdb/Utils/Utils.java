@@ -11,10 +11,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Yassine on 21/11/2017.
- */
-
 public class Utils {
 
     private static final String fileName = "favories";
@@ -50,9 +46,7 @@ public class Utils {
             ObjectInputStream in = new ObjectInputStream(fis);
             list = (List<Integer>) in.readObject();
             in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
 

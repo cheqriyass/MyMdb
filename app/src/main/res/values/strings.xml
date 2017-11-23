@@ -35,5 +35,6 @@
     <string name="image_quality">Image quality</string>
     <string name="movies">Movies</string>
     <string name="search">Search</string>
+    <string name="layout">layout</string>
 
 </resources>

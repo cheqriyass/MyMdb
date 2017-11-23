@@ -49,13 +49,14 @@ public class MoviesActivity extends BaseDrawerActivity{
 
     RecyclerView rv;
     ProgressBar progressBar;
+    RecyclerView.ItemDecoration separator;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.movies_list, frameLayout);
+        getLayoutInflater().inflate(R.layout.activity_movies, frameLayout);
         setTitle(getString(R.string.movies));
 
 
@@ -66,9 +67,9 @@ public class MoviesActivity extends BaseDrawerActivity{
         movieService = Client.getClient().create(ApiService.class);
         rv = (RecyclerView) findViewById(R.id.moviesRecycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
-
+        separator = new SimpleDividerItemDecoration(this);
         adapter = new PaginationAdapterMovies(this);
-        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
+        rv.addItemDecoration(separator);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new GridLayoutManager(this, 3);
 
@@ -104,9 +105,13 @@ public class MoviesActivity extends BaseDrawerActivity{
         if (id == R.id.change_layout) {
             layout = ++layout%3;
             if (layout == 2) {
+                rv.removeItemDecoration(separator);
                 rv.setLayoutManager(gridLayoutManager);
             }
-            else {
+            else if (layout == 1){
+                rv.setLayoutManager(linearLayoutManager);
+            } else {
+                rv.addItemDecoration(separator);
                 rv.setLayoutManager(linearLayoutManager);
             }
             setScroll();
@@ -176,7 +181,7 @@ public class MoviesActivity extends BaseDrawerActivity{
 
 
     void setScroll(){
-        LinearLayoutManager layoutManager= null;
+        LinearLayoutManager layoutManager;
 
         if (layout == 2)
             layoutManager = gridLayoutManager;

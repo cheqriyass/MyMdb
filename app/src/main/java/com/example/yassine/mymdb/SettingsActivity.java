@@ -44,12 +44,17 @@ public class SettingsActivity extends BaseDrawerActivity {
             langSpinner.setSelection(1);
 
 
-        if (qual.equals("original"))
-            qualSpinner.setSelection(0);
-        else if (qual.equals("w780"))
-            qualSpinner.setSelection(1);
-        else
-            qualSpinner.setSelection(2);
+        switch (qual) {
+            case "original":
+                qualSpinner.setSelection(0);
+                break;
+            case "w780":
+                qualSpinner.setSelection(1);
+                break;
+            default:
+                qualSpinner.setSelection(2);
+                break;
+        }
 
 
 
@@ -63,7 +68,7 @@ public class SettingsActivity extends BaseDrawerActivity {
                 String lang = parentView.getItemAtPosition(position).toString();
 
 
-                Locale locale = null;
+                Locale locale;
 
                 switch (lang){
                     case "French":
