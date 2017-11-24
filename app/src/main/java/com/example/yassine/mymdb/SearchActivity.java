@@ -32,7 +32,7 @@ public class SearchActivity extends BaseDrawerActivity {
     private RecyclerView rv;
     private List<Movie> movies = new ArrayList<>();
     private ApiService movieService;
-    private static String language = "fr_FR";
+    private String language = "fr-FR";
     private Button btnSearch;
     private EditText searchInput;
     private Context context;
