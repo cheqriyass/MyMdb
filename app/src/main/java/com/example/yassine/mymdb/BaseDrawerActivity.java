@@ -20,8 +20,9 @@ import java.util.Locale;
 
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
-public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+public class BaseDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static int layout = 0;
+    public static int oldLayout = 0;
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
     NavigationView navigationView;
@@ -61,28 +62,32 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (item.isChecked()){
+        if (item.isChecked()) {
             drawerLayout.closeDrawer(GravityCompat.START);
             return false;
         }
 
+
         Intent intent;
         if (id == R.id.movies) {
-             intent = new Intent(this, MoviesActivity.class);
+            layout = oldLayout;
+            intent = new Intent(this, MoviesActivity.class);
         } else if (id == R.id.tvshows) {
+            layout = oldLayout;
             intent = new Intent(this, SeriesActivity.class);
         } else if (id == R.id.about) {
             intent = new Intent(this, AboutActivity.class);
         } else if (id == R.id.settings) {
             intent = new Intent(this, SettingsActivity.class);
         } else if (id == R.id.search) {
+            layout = 0;
             intent = new Intent(this, SearchActivity.class);
         } else { // favorites
+            layout = 0;
             intent = new Intent(this, FavoriesActivity.class);
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NO_ANIMATION);
-
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
         startActivity(intent);
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -90,7 +95,7 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     }
 
 
-    private void setLocal(){
+    private void setLocal() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
         if (language == null) {
@@ -100,15 +105,13 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
         }
         Locale locale;
 
-        switch (language){
+        switch (language) {
             case "fr-FR":
                 locale = new Locale("fr");
                 break;
             default:
                 locale = new Locale("en");
         }
-
-
 
 
         Resources res = context.getResources();

@@ -18,8 +18,7 @@
             android:name=".MoviesActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN" />s
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,7 +37,8 @@
         <activity
             android:name=".SerieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SearchActivity"
+        <activity
+            android:name=".SearchActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

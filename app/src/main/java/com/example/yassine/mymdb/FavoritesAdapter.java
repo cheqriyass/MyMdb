@@ -28,9 +28,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MovieViewHolder viewHolder;
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.movie_list_item_1, parent, false);
         viewHolder = new MovieViewHolder(view);
 
@@ -38,21 +36,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final MovieViewHolder vh = (MovieViewHolder) holder;
+        MovieViewHolder vh = (MovieViewHolder) holder;
         final Movie movie = moviesList.get(position);
         vh.movie_title.setText(movie.getTitle());
-        vh.movie_desc.setText((movie.getOverview().length()>80 ?
-                movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
+        vh.movie_desc.setText((movie.getOverview().length() > 80 ?
+                movie.getOverview().substring(0, 80) + "..." : movie.getOverview()));
 
         String poster = movie.getPosterPath(context);
 
         Glide.with(context)
                 .load(poster)
                 .into(vh.thumbnail);
-
 
 
         vh.setListener(new ItemClickListener() {
@@ -68,7 +64,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return moviesList == null ? 0 : moviesList.size();
+        return moviesList.size();
     }
 
 }

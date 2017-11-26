@@ -26,8 +26,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeriesActivity extends BaseDrawerActivity{
-    public static int layout = 0;
+public class SeriesActivity extends BaseDrawerActivity {
+
     private static final String TAG = "MainActivity";
     private static String language;
 
@@ -39,7 +39,6 @@ public class SeriesActivity extends BaseDrawerActivity{
     private int currentPage = PAGE_START;
 
     private ApiService movieService;
-
 
 
     PaginationAdapterSeries adapter;
@@ -60,29 +59,18 @@ public class SeriesActivity extends BaseDrawerActivity{
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
 
-        layout = 0;
-
         movieService = Client.getClient().create(ApiService.class);
         rv = (RecyclerView) findViewById(R.id.seriesRecycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
         separator = new SimpleDividerItemDecoration(this);
         adapter = new PaginationAdapterSeries(this);
-        rv.addItemDecoration(separator);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new GridLayoutManager(this, 3);
 
         rv.setItemAnimator(new DefaultItemAnimator());
 
-
-        rv.setLayoutManager(linearLayoutManager);
-        setScroll();
-        rv.setAdapter(adapter);
-
-
+        setView();
         loadFirstPage();
-
-
-
     }
 
 
@@ -96,25 +84,28 @@ public class SeriesActivity extends BaseDrawerActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.change_layout) {
-            layout = ++layout%3;
-            if (layout == 2) {
-                rv.removeItemDecoration(separator);
-                rv.setLayoutManager(gridLayoutManager);
-            }
-            else if (layout == 1){
-                rv.setLayoutManager(linearLayoutManager);
-            } else {
-                rv.addItemDecoration(separator);
-                rv.setLayoutManager(linearLayoutManager);
-            }
-            setScroll();
-            rv.setAdapter(adapter);
+            layout = ++layout % 3;
+            oldLayout = layout;
+            setView();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void setView() {
+        if (layout == 2) {
+            rv.removeItemDecoration(separator);
+            rv.setLayoutManager(gridLayoutManager);
+        } else if (layout == 1) {
+            rv.setLayoutManager(linearLayoutManager);
+        } else {
+            rv.addItemDecoration(separator);
+            rv.setLayoutManager(linearLayoutManager);
+        }
+        setScroll();
+        rv.setAdapter(adapter);
+    }
 
     private void
     loadFirstPage() {
@@ -163,7 +154,6 @@ public class SeriesActivity extends BaseDrawerActivity{
     }
 
 
-
     private Call<SeriesResponse> callPopularSeriesApi() {
         return movieService.getPopularSeries(
                 getString(R.string.api_key),
@@ -173,7 +163,7 @@ public class SeriesActivity extends BaseDrawerActivity{
     }
 
 
-    void setScroll(){
+    void setScroll() {
         LinearLayoutManager layoutManager;
 
         if (layout == 2)

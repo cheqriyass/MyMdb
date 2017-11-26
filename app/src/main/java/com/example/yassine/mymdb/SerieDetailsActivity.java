@@ -63,23 +63,23 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
         ButtonStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isEnable){
+                if (isEnable) {
 
                     Integer deletedRows = myDb.deleteData(movie.getId().toString());
-                    if(deletedRows > 0)
-                        if (toast!=null)
+                    if (deletedRows > 0)
+                        if (toast != null)
                             toast.cancel();
-                    toast = Toast.makeText(SerieDetailsActivity.this,"Film supprimé des favories",Toast.LENGTH_LONG);
+                    toast = Toast.makeText(SerieDetailsActivity.this, "Film supprimé des favories", Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
-                }else{
+                } else {
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle(), movie.getOverview(),
                             movie.posterPath, movie.backdropPath, movie.getVoteAverage());
-                    if(isInserted) {
-                        if (toast!=null)
+                    if (isInserted) {
+                        if (toast != null)
                             toast.cancel();
                         toast = makeText(SerieDetailsActivity.this, "Film ajouté au favories", Toast.LENGTH_LONG);
                     } else {
-                        if (toast!=null)
+                        if (toast != null)
                             toast.cancel();
                         toast = makeText(SerieDetailsActivity.this, "Error", Toast.LENGTH_LONG);
                         return;
@@ -108,8 +108,6 @@ public class SerieDetailsActivity extends BaseDrawerActivity {
             ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
         }
     }
-
-
 
 
 }
