@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class MoviesActivity extends BaseDrawerActivity{
 
-    //public static int layout = 0;
+    
     private static final String TAG = "MainActivity";
     private static String language;
 
