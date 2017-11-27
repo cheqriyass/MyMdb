@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.yassine.mymdb.PaginationAdapterMovies.MovieViewHolder;
 import com.example.yassine.mymdb.models.ItemClickListener;
 import com.example.yassine.mymdb.models.Movie;
+import com.example.yassine.mymdb.models.ItemViewHolder;
 
 import java.util.List;
+
+
 
 public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -26,11 +28,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MovieViewHolder viewHolder;
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ItemViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.movie_list_item_1, parent, false);
-        viewHolder = new MovieViewHolder(view);
+        viewHolder = new ItemViewHolder(view);
 
         return viewHolder;
     }
@@ -38,7 +40,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MovieViewHolder vh = (MovieViewHolder) holder;
+        ItemViewHolder vh = (ItemViewHolder) holder;
         final Movie movie = moviesList.get(position);
         vh.movie_title.setText(movie.getTitle());
         vh.movie_desc.setText((movie.getOverview().length() > 80 ?

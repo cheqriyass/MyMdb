@@ -7,18 +7,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.yassine.mymdb.Utils.PaginationScrollListener;
+import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.Movie;
 import com.example.yassine.mymdb.models.MoviesResponse;
-import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 
 import java.util.List;
 
@@ -28,8 +27,6 @@ import retrofit2.Response;
 
 public class MoviesActivity extends BaseDrawerActivity{
 
-    //public static int layout = 0;
-    private static final String TAG = "MainActivity";
     private static String language;
 
     private static final int PAGE_START = 1;
@@ -119,8 +116,6 @@ public class MoviesActivity extends BaseDrawerActivity{
     //**********************************************************************************
 
     private void loadFirstPage() {
-        Log.d(TAG, "loadFirstPage: ");
-
 
         callPopularMoviesApi().enqueue(new Callback<MoviesResponse>() {
             @Override

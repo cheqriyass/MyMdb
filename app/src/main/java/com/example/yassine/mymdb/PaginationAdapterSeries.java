@@ -7,18 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.yassine.mymdb.models.ItemClickListener;
+import com.example.yassine.mymdb.models.ItemViewHolder;
 import com.example.yassine.mymdb.models.Serie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
+public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
@@ -73,7 +72,7 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
                 break;
         }
 
-        viewHolder = new MovieViewHolder(v);
+        viewHolder = new ItemViewHolder(v);
         return viewHolder;
     }
 
@@ -84,7 +83,7 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
 
         switch (getItemViewType(position)) {
             case ITEM:
-                final MovieViewHolder movieVH = (MovieViewHolder) holder;
+                final ItemViewHolder movieVH = (ItemViewHolder) holder;
 
                 movieVH.setListener(new ItemClickListener() {
                     @Override
@@ -96,7 +95,7 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
                     }
                 });
 
-                if (SeriesActivity.layout != 2){
+                if (BaseDrawerActivity.layout != 2){
                     movieVH.movie_title.setText(movie.getTitle());
                     movieVH.movie_desc.setText((movie.getOverview().length()>80 ?
                             movie.getOverview().substring(0,80) + "..." : movie.getOverview()));
@@ -196,43 +195,6 @@ public class PaginationAdapterSeries extends RecyclerView.Adapter<RecyclerView.V
         return moviesList.get(position);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
-
-   /*
-   View Holders
-   _________________________________________________________________________________________________
-    */
-
-    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView movie_title;
-        TextView movie_desc;
-        public ImageView thumbnail;
-        private ItemClickListener listener;
-
-        public MovieViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-            this.thumbnail = itemView.findViewById(R.id.thumbnail);
-            if (SeriesActivity.layout != 2){
-                this.movie_title = itemView.findViewById(R.id.movie_title);
-                this.movie_desc = itemView.findViewById(R.id.movie_desc);
-            }
-        }
-
-        public void setListener(ItemClickListener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        public void onClick(View v) {
-            listener.onClick(v, getAdapterPosition());
-        }
-
-    }
 
 
     protected class LoadingVH extends RecyclerView.ViewHolder {

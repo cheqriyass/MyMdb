@@ -15,7 +15,6 @@ import android.widget.EditText;
 import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
-import com.example.yassine.mymdb.models.DatabaseHelper;
 import com.example.yassine.mymdb.models.Movie;
 import com.example.yassine.mymdb.models.MoviesResponse;
 
@@ -28,9 +27,7 @@ import retrofit2.Response;
 
 public class SearchActivity extends BaseDrawerActivity {
 
-    private DatabaseHelper myDb;
     private RecyclerView rv;
-    private List<Movie> movies = new ArrayList<>();
     private ApiService movieService;
     private String language = "fr-FR";
     private Button btnSearch;

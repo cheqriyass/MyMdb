@@ -1,6 +1,5 @@
 package com.example.yassine.mymdb;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,14 +19,12 @@ public class FavoriesActivity extends BaseDrawerActivity {
     private DatabaseHelper myDb;
     private RecyclerView rv;
     private List<Movie> movies = new ArrayList<>();
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_favories, frameLayout);
         setTitle(getString(R.string.favorites));
-        context = this;
         myDb = new DatabaseHelper(this);
         Cursor res = myDb.getAllData();
         rv = (RecyclerView) findViewById(R.id.favoritesRecycler);
