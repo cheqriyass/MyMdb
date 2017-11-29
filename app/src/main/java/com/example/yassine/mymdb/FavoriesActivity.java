@@ -25,11 +25,17 @@ public class FavoriesActivity extends BaseDrawerActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_favories, frameLayout);
         setTitle(getString(R.string.favorites));
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
         myDb = new DatabaseHelper(this);
         Cursor res = myDb.getAllData();
         rv = (RecyclerView) findViewById(R.id.favoritesRecycler);
 
-
+        movies = new ArrayList<>();
         while (res.moveToNext()) {
             Log.v("movie", res.getString(0) + " " + res.getString(1));
             Movie m = new Movie(Integer.parseInt(res.getString(0)), res.getString(1),
@@ -45,5 +51,4 @@ public class FavoriesActivity extends BaseDrawerActivity {
         rv.setHasFixedSize(true);
         rv.setAdapter(adapter);
     }
-
 }
