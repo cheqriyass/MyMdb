@@ -12,12 +12,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.yassine.mymdb.api.ApiService;
+import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.DatabaseHelper;
 import com.example.yassine.mymdb.models.Movie;
+import com.example.yassine.mymdb.models.Trailer;
+import com.example.yassine.mymdb.models.TrailerResponse;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.widget.Toast.makeText;
 
-public class MovieDetails extends BaseDrawerActivity {
+public class MovieDetails extends YouTubeBaseActivity {
 
     private Movie movie;
     private String language;
@@ -25,16 +39,21 @@ public class MovieDetails extends BaseDrawerActivity {
     ImageButton ButtonStar;
     DatabaseHelper myDb;
     Toast toast;
+    YouTubePlayerView youTubePlayerView;
+    YouTubePlayer.OnInitializedListener onInitializedListener;
+    private ApiService movieService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
-        setTitle(getString(R.string.movie_details));
+//        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
+//        setTitle(getString(R.string.movie_details));
+        super.setContentView(R.layout.activity_movie_details);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
 
+        movieService = Client.getClient().create(ApiService.class);
 
         myDb = new DatabaseHelper(this);
 
@@ -93,10 +112,47 @@ public class MovieDetails extends BaseDrawerActivity {
 
         Glide.with(this)
                 .load(poster)
-                //.placeholder(R.drawable.load)
                 .into(thumbnail);
 
+        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
+
+
+        callgetTrailerApi().enqueue(new Callback<TrailerResponse>() {
+            @Override
+            public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                final List<Trailer> results = response.body().getResults();
+
+                if (results != null && results.size()>0) {
+                    onInitializedListener = new YouTubePlayer.OnInitializedListener() {
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                            youTubePlayer.cueVideo(results.get(0).getKey());
+                        }
+
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+                        }
+                    };
+
+                    youTubePlayerView.initialize(getString(R.string.youtube_api_key), onInitializedListener);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
+
+
+
+
     }
+
+
 
 
     public void loadIcon() {
@@ -105,6 +161,13 @@ public class MovieDetails extends BaseDrawerActivity {
         } else {
             ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
         }
+    }
+
+
+    private Call<TrailerResponse> callgetTrailerApi() {
+        return movieService.getTrailer(movie.getId(),
+                getString(R.string.api_key),
+                language);
     }
 
 

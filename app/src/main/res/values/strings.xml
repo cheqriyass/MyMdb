@@ -34,5 +34,6 @@
     <string name="movies">Movies</string>
     <string name="search">Search</string>
     <string name="layout">layout</string>
+    <string name="youtube_api_key">AIzaSyCJPnPxhZVcBiZLvR8IfTdkmTJ8ZeIQDK0</string>
 
 </resources>

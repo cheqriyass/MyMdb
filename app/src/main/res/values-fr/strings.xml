@@ -29,6 +29,7 @@
     </string-array>
     <string name="search">Chercher</string>
     <string name="layout">affichage</string>
+    <string name="youtube_api_key">AIzaSyCJPnPxhZVcBiZLvR8IfTdkmTJ8ZeIQDK0</string>
 
 
 </resources>
