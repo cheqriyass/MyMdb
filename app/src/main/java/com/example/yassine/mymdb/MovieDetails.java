@@ -37,6 +37,7 @@ public class MovieDetails extends YouTubeBaseActivity {
     private String language;
     private boolean isEnable = false;
     ImageButton ButtonStar;
+    ImageButton ButtonShare;
     DatabaseHelper myDb;
     Toast toast;
     YouTubePlayerView youTubePlayerView;
@@ -61,6 +62,7 @@ public class MovieDetails extends YouTubeBaseActivity {
         Intent i = getIntent();
         movie = (Movie) i.getSerializableExtra("movie");
         ButtonStar = (ImageButton) findViewById(R.id.favorite);
+        ButtonShare = (ImageButton) findViewById(R.id.share);
 
         TextView movie_title = (TextView) findViewById(R.id.movie_title);
         TextView movie_desc = (TextView) findViewById(R.id.movie_desc);
@@ -106,6 +108,20 @@ public class MovieDetails extends YouTubeBaseActivity {
 
                 toast.show();
                 isEnable = !isEnable;
+            }
+        });
+
+
+        ButtonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareBody = getString(R.string.share_must_watch) + " " + movie.getTitle();
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_window_title)));
+
+
             }
         });
 
