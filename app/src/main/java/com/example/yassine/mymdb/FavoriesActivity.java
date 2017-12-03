@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.models.DatabaseHelper;
@@ -37,9 +36,9 @@ public class FavoriesActivity extends BaseDrawerActivity {
 
         movies = new ArrayList<>();
         while (res.moveToNext()) {
-            Log.v("movie", res.getString(0) + " " + res.getString(1));
             Movie m = new Movie(Integer.parseInt(res.getString(0)), res.getString(1),
-                    res.getString(3), res.getString(2), res.getString(4), Double.parseDouble(res.getString(5)));
+                    res.getString(3), res.getString(2), res.getString(4),
+                    Double.parseDouble(res.getString(5)), Integer.parseInt(res.getString(6)));
             movies.add(m);
         }
 

@@ -73,7 +73,7 @@ public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        final Movie movie = moviesList.get(position); // Movie
+        final Movie movie = moviesList.get(position); // getMovieTrailer
 
         switch (getItemViewType(position)) {
             case ITEM:
@@ -83,7 +83,7 @@ public class PaginationAdapterMovies extends RecyclerView.Adapter<RecyclerView.V
                     @Override
                     public void onClick(View view, int pos) {
 
-                        Intent detailsIntent = new Intent(context, MovieDetails.class);
+                        Intent detailsIntent = new Intent(context, MovieDetailsActivity.class);
                         detailsIntent.putExtra("movie", movie);
                         context.startActivity(detailsIntent);
                     }

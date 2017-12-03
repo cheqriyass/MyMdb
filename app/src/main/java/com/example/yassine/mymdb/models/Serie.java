@@ -86,12 +86,13 @@ public class Serie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public Serie(Integer id, String title, String posterPath, String overview, String backdropPath) {
+    public Serie(Integer id, String title, String posterPath, String overview, String backdropPath, double vote) {
         this.id = id;
         this.title = title;
         this.posterPath = posterPath;
         this.overview = overview;
         this.backdropPath = backdropPath;
+        this.voteAverage = vote;
     }
 
     public Serie() {

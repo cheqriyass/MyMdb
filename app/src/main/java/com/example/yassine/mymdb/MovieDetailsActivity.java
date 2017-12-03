@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 import static android.widget.Toast.makeText;
 
-public class MovieDetails extends YouTubeBaseActivity {
+public class MovieDetailsActivity extends YouTubeBaseActivity {
 
     private Movie movie;
     private String language;
@@ -47,8 +47,6 @@ public class MovieDetails extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
-//        setTitle(getString(R.string.movie_details));
         super.setContentView(R.layout.activity_movie_details);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
@@ -90,15 +88,15 @@ public class MovieDetails extends YouTubeBaseActivity {
                     if(deletedRows > 0)
                         if (toast!=null)
                             toast.cancel();
-                    toast = Toast.makeText(MovieDetails.this,getString(R.string.deleted_from_favs),Toast.LENGTH_LONG);
+                    toast = Toast.makeText(MovieDetailsActivity.this,getString(R.string.deleted_from_favs),Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                 }else{
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle(), movie.getOverview(),
-                            movie.posterPath, movie.backdropPath, movie.getVoteAverage());
+                            movie.posterPath, movie.backdropPath, movie.getVoteAverage(), 1);
                     if(isInserted) {
                         if (toast!=null)
                             toast.cancel();
-                        toast = makeText(MovieDetails.this, getString(R.string.added_to_favs), Toast.LENGTH_LONG);
+                        toast = makeText(MovieDetailsActivity.this, getString(R.string.added_to_favs), Toast.LENGTH_LONG);
                     } else {
                         return;
                     }
@@ -120,8 +118,6 @@ public class MovieDetails extends YouTubeBaseActivity {
                 String shareBody = getString(R.string.share_must_watch) + " " + movie.getTitle();
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share_window_title)));
-
-
             }
         });
 
@@ -133,10 +129,10 @@ public class MovieDetails extends YouTubeBaseActivity {
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
 
 
-        callgetTrailerApi().enqueue(new Callback<TrailerResponse>() {
+        callgetMovieTrailerApi().enqueue(new Callback<TrailerResponse>() {
             @Override
             public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
-                final List<Trailer> results = response.body().getResults();
+                final List<Trailer> results = response.body() != null ? response.body().getResults() : null;
 
                 if (results != null && results.size()>0) {
                     onInitializedListener = new YouTubePlayer.OnInitializedListener() {
@@ -152,6 +148,8 @@ public class MovieDetails extends YouTubeBaseActivity {
                     };
 
                     youTubePlayerView.initialize(getString(R.string.youtube_api_key), onInitializedListener);
+                }else{
+                    youTubePlayerView.setVisibility(View.GONE);
                 }
             }
 
@@ -180,12 +178,11 @@ public class MovieDetails extends YouTubeBaseActivity {
     }
 
 
-    private Call<TrailerResponse> callgetTrailerApi() {
-        return movieService.getTrailer(movie.getId(),
+    private Call<TrailerResponse> callgetMovieTrailerApi() {
+        return movieService.getMovieTrailer(movie.getId(),
                 getString(R.string.api_key),
                 language);
     }
-
 
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
-    tools:context="com.example.yassine.mymdb.MovieDetails">
+    tools:context="com.example.yassine.mymdb.MovieDetailsActivity">
 
     <ScrollView
         android:layout_width="0dp"
@@ -23,11 +23,11 @@
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:contentDescription="poster"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="240dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="poster"
                 android:scaleType="fitXY"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"

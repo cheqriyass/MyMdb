@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.yassine.mymdb.models.ItemClickListener;
-import com.example.yassine.mymdb.models.Movie;
 import com.example.yassine.mymdb.models.ItemViewHolder;
+import com.example.yassine.mymdb.models.Movie;
+import com.example.yassine.mymdb.models.Serie;
 
 import java.util.List;
 
@@ -56,9 +57,18 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         vh.setListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
+                Intent detailsIntent;
 
-                Intent detailsIntent = new Intent(context, MovieDetails.class);
-                detailsIntent.putExtra("movie", movie);
+                if (movie.isMovie() == 1) {
+                    detailsIntent = new Intent(context, MovieDetailsActivity.class);
+                    detailsIntent.putExtra("movie", movie);
+                } else {
+                    detailsIntent = new Intent(context, SerieDetailsActivity.class);
+                    Serie serie = new Serie(movie.getId(), movie.getTitle(), movie.posterPath, movie.getOverview(),
+                            movie.backdropPath, movie.getVoteAverage());
+                    detailsIntent.putExtra("serie", serie);
+                }
+
                 context.startActivity(detailsIntent);
             }
         });

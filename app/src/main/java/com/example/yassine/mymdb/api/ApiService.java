@@ -28,7 +28,12 @@ public interface ApiService {
                                      @Query("page") int pageIndex);
 
     @GET("movie/{movie_id}/videos")
-    Call<TrailerResponse> getTrailer(@Path("movie_id") int movie_id,
+    Call<TrailerResponse> getMovieTrailer(@Path("movie_id") int movie_id,
+                                          @Query("api_key") String apiKey,
+                                          @Query("language") String language);
+
+    @GET("tv/{tv_id}/videos")
+    Call<TrailerResponse> getTvShowTrailer(@Path("tv_id") int tv_id,
                                      @Query("api_key") String apiKey,
                                      @Query("language") String language);
 }

@@ -30,6 +30,8 @@ public class Movie implements Serializable {
     @SerializedName("backdrop_path")
     public String backdropPath;
 
+    private int isMovie;
+
     public Integer getId() {
         return id;
     }
@@ -52,6 +54,14 @@ public class Movie implements Serializable {
 
     public void setPopularity(Double popularity) {
         this.popularity = popularity;
+    }
+
+    public int isMovie() {
+        return isMovie;
+    }
+
+    public void setMovie(int movie) {
+        this.isMovie = movie;
     }
 
     public String getPosterPath(Context context) {
@@ -87,13 +97,14 @@ public class Movie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public Movie(Integer id, String title, String posterPath, String overview, String backdropPath, double vote) {
+    public Movie(Integer id, String title, String posterPath, String overview, String backdropPath, double vote, int isMovie) {
         this.id = id;
         this.title = title;
         this.posterPath = posterPath;
         this.overview = overview;
         this.backdropPath = backdropPath;
         this.voteAverage = vote;
+        this.isMovie = isMovie;
     }
 
     public Movie() {
