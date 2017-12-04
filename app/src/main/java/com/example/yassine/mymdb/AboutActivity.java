@@ -8,6 +8,6 @@ public class AboutActivity extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_about, frameLayout);
-        setTitle(getString(R.string.search));
+        setTitle(getString(R.string.about));
     }
 }
