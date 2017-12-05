@@ -15,7 +15,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="api_key">45fa97bb1a56497c117f5a249170e9af</string>
-    <string name="image_quality">Qualité image</string>
+    <string name="image_quality">Qualité d\'image</string>
 
     <string-array name="image_qualities">
         <item>original</item>
