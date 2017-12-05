@@ -110,6 +110,7 @@ public class MovieDetailsActivity extends BaseDrawerActivity implements YouTubeP
         });
 
 
+
         ButtonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +172,7 @@ public class MovieDetailsActivity extends BaseDrawerActivity implements YouTubeP
             });
         }
     }
+
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
