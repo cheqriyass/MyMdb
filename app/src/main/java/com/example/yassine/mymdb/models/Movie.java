@@ -30,7 +30,7 @@ public class Movie implements Serializable {
     @SerializedName("backdrop_path")
     public String backdropPath;
 
-    private int isMovie;
+    private int isMovie=1;
 
     public Integer getId() {
         return id;

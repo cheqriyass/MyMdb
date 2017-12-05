@@ -59,14 +59,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View view, int pos) {
                 Intent detailsIntent;
 
-                if (movie.isMovie() == 1) {
-                    detailsIntent = new Intent(context, MovieDetailsActivity.class);
-                    detailsIntent.putExtra("movie", movie);
-                } else {
+                if (movie.isMovie() == 0) {
                     detailsIntent = new Intent(context, SerieDetailsActivity.class);
                     Serie serie = new Serie(movie.getId(), movie.getTitle(), movie.posterPath, movie.getOverview(),
                             movie.backdropPath, movie.getVoteAverage());
                     detailsIntent.putExtra("serie", serie);
+
+                } else {
+                    detailsIntent = new Intent(context, MovieDetailsActivity.class);
+                    detailsIntent.putExtra("movie", movie);
                 }
 
                 context.startActivity(detailsIntent);
