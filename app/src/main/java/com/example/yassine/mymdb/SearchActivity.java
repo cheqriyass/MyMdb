@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.Movie;
@@ -53,7 +52,7 @@ public class SearchActivity extends BaseDrawerActivity {
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
+
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setLayoutManager(linearLayoutManager);
 

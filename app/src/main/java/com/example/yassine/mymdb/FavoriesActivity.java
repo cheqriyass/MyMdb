@@ -6,7 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.models.DatabaseHelper;
 import com.example.yassine.mymdb.models.Movie;
 
@@ -42,7 +41,6 @@ public class FavoriesActivity extends BaseDrawerActivity {
             movies.add(m);
         }
 
-        rv.addItemDecoration(new SimpleDividerItemDecoration(this));
         rv.setItemAnimator(new DefaultItemAnimator());
 
         FavoritesAdapter adapter = new FavoritesAdapter(this, movies);

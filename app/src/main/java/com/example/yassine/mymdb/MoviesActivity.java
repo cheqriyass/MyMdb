@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.yassine.mymdb.Utils.PaginationScrollListener;
-import com.example.yassine.mymdb.Utils.SimpleDividerItemDecoration;
 import com.example.yassine.mymdb.api.ApiService;
 import com.example.yassine.mymdb.api.Client;
 import com.example.yassine.mymdb.models.Movie;
@@ -46,7 +45,6 @@ public class MoviesActivity extends BaseDrawerActivity{
 
     RecyclerView rv;
     ProgressBar progressBar;
-    RecyclerView.ItemDecoration separator;
 
 
 
@@ -62,7 +60,6 @@ public class MoviesActivity extends BaseDrawerActivity{
         movieService = Client.getClient().create(ApiService.class);
         rv = (RecyclerView) findViewById(R.id.moviesRecycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
-        separator = new SimpleDividerItemDecoration(this);
         adapter = new PaginationAdapterMovies(this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new GridLayoutManager(this, 3);
@@ -75,13 +72,11 @@ public class MoviesActivity extends BaseDrawerActivity{
 
     private void setView() {
         if (layout == 2) {
-            rv.removeItemDecoration(separator);
             rv.setLayoutManager(gridLayoutManager);
         }
         else if (layout == 1){
             rv.setLayoutManager(linearLayoutManager);
         } else {
-            rv.addItemDecoration(separator);
             rv.setLayoutManager(linearLayoutManager);
         }
         setScroll();

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_album_radius">5dp</dimen>
+    <dimen name="layout1_height">130dp</dimen>
+    <dimen name="layout2_height">300dp</dimen>
+    <dimen name="layout3_height">180dp</dimen>
+</resources>
