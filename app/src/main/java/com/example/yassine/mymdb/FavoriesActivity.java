@@ -23,7 +23,6 @@ public class FavoriesActivity extends BaseDrawerActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_favories, frameLayout);
         setTitle(getString(R.string.favorites));
-
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,10 +19,9 @@ import com.example.yassine.mymdb.models.DatabaseHelper;
 import com.example.yassine.mymdb.models.Movie;
 import com.example.yassine.mymdb.models.Trailer;
 import com.example.yassine.mymdb.models.TrailerResponse;
-import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 import static android.widget.Toast.makeText;
 
-public class MovieDetailsActivity extends YouTubeBaseActivity {
+public class MovieDetailsActivity extends BaseDrawerActivity implements YouTubePlayer.OnInitializedListener {
 
     private Movie movie;
     private String language;
@@ -40,14 +40,14 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     ImageButton ButtonShare;
     DatabaseHelper myDb;
     Toast toast;
-    YouTubePlayerView youTubePlayerView;
-    YouTubePlayer.OnInitializedListener onInitializedListener;
+    YouTubePlayerSupportFragment youTubePlayerView;
     private ApiService movieService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_movie_details);
+        getLayoutInflater().inflate(R.layout.activity_movie_details, frameLayout);
+        setTitle(getString(R.string.movie_details));
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         language = pref.getString("lang", null);
@@ -82,19 +82,19 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         ButtonStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isEnable){
+                if (isEnable) {
 
                     Integer deletedRows = myDb.deleteData(movie.getId().toString());
-                    if(deletedRows > 0)
-                        if (toast!=null)
+                    if (deletedRows > 0)
+                        if (toast != null)
                             toast.cancel();
-                    toast = Toast.makeText(MovieDetailsActivity.this,getString(R.string.deleted_from_favs),Toast.LENGTH_LONG);
+                    toast = Toast.makeText(MovieDetailsActivity.this, getString(R.string.deleted_from_favs), Toast.LENGTH_LONG);
                     ButtonStar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
-                }else{
+                } else {
                     boolean isInserted = myDb.insertData(movie.getId().toString(), movie.getTitle(), movie.getOverview(),
                             movie.posterPath, movie.backdropPath, movie.getVoteAverage(), 1);
-                    if(isInserted) {
-                        if (toast!=null)
+                    if (isInserted) {
+                        if (toast != null)
                             toast.cancel();
                         toast = makeText(MovieDetailsActivity.this, getString(R.string.added_to_favs), Toast.LENGTH_LONG);
                     } else {
@@ -126,47 +126,9 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                 .load(poster)
                 .into(thumbnail);
 
-        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
-
-
-        callgetMovieTrailerApi().enqueue(new Callback<TrailerResponse>() {
-            @Override
-            public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
-                final List<Trailer> results = response.body() != null ? response.body().getResults() : null;
-
-                if (results != null && results.size()>0) {
-                    onInitializedListener = new YouTubePlayer.OnInitializedListener() {
-                        @Override
-                        public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                            youTubePlayer.cueVideo(results.get(0).getKey());
-                        }
-
-                        @Override
-                        public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-                        }
-                    };
-
-                    youTubePlayerView.initialize(getString(R.string.youtube_api_key), onInitializedListener);
-                }else{
-                    youTubePlayerView.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TrailerResponse> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-
-
-
-
-
-
+        youTubePlayerView = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
+        youTubePlayerView.initialize(getString(R.string.youtube_api_key), this);
     }
-
-
 
 
     public void loadIcon() {
@@ -185,5 +147,40 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     }
 
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
+        if (!wasRestored) {
+            final YouTubePlayer player = youTubePlayer;
+            callgetMovieTrailerApi().enqueue(new Callback<TrailerResponse>() {
+                @Override
+                public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                    final List<Trailer> results = response.body() != null ? response.body().getResults() : null;
 
+                    if (results != null && results.size() > 0) {
+                        player.cueVideo(results.get(0).getKey());
+                    }else{
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().hide(youTubePlayerView).commit();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, 1).show();
+        } else {
+            String errorMessage = String.format(
+                    "There was an error initializing the YouTubePlayer (%1$s)",
+                    errorReason.toString());
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+        }
+    }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="0dp"
+    android:layout_marginTop="@dimen/toolbar_margin"
     tools:context="com.example.yassine.mymdb.MovieDetailsActivity">
 
     <ScrollView
@@ -16,8 +16,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/details_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="20dp"
             android:orientation="vertical"
             tools:ignore="ScrollViewSize">
 
@@ -96,14 +98,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
-            <com.google.android.youtube.player.YouTubePlayerView
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
                 android:id="@+id/youtube_player"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="30dp">
-
-            </com.google.android.youtube.player.YouTubePlayerView>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </ScrollView>

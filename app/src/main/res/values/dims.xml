@@ -5,4 +5,5 @@
     <dimen name="layout1_height">130dp</dimen>
     <dimen name="layout2_height">300dp</dimen>
     <dimen name="layout3_height">180dp</dimen>
+    <dimen name="toolbar_margin">56dp</dimen>
 </resources>
