@@ -70,7 +70,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     detailsIntent.putExtra("movie", movie);
                 }
 
-                context.startActivity(detailsIntent);
+                    context.startActivity(detailsIntent);
             }
         });
     }

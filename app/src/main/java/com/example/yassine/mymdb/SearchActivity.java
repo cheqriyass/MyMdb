@@ -29,7 +29,6 @@ public class SearchActivity extends BaseDrawerActivity {
     private RecyclerView rv;
     private ApiService movieService;
     private String language = "fr-FR";
-    private Button btnSearch;
     private EditText searchInput;
     private Context context;
     private Activity activity;
@@ -43,7 +42,7 @@ public class SearchActivity extends BaseDrawerActivity {
         context = this;
         activity = SearchActivity.this;
 
-        btnSearch = (Button) findViewById(R.id.btnSearch);
+        Button btnSearch = (Button) findViewById(R.id.btnSearch);
         searchInput = (EditText) findViewById(R.id.searchInput);
         rv = (RecyclerView) findViewById(R.id.searchRecycler);
 

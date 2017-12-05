@@ -16,8 +16,6 @@ import java.util.Locale;
 
 public class SettingsActivity extends BaseDrawerActivity {
 
-    private Spinner langSpinner;
-    private Spinner qualSpinner;
     private boolean firstLaunch = true;
     private boolean firstLaunchQual = true;
     private Context context;
@@ -38,8 +36,8 @@ public class SettingsActivity extends BaseDrawerActivity {
             editor.putString("quality", qual).apply();
         }
 
-        langSpinner = (Spinner) findViewById(R.id.lang_spinner);
-        qualSpinner = (Spinner) findViewById(R.id.qual_spinner);
+        Spinner langSpinner = (Spinner) findViewById(R.id.lang_spinner);
+        Spinner qualSpinner = (Spinner) findViewById(R.id.qual_spinner);
 
 
         if (language.equals("fr-FR"))
@@ -63,6 +61,7 @@ public class SettingsActivity extends BaseDrawerActivity {
 
 
         langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);

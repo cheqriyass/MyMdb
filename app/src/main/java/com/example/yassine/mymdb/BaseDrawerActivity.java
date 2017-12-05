@@ -42,7 +42,7 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -95,6 +95,7 @@ public class BaseDrawerActivity extends AppCompatActivity implements NavigationV
     }
 
 
+    @SuppressWarnings("deprecation")
     private void setLocal() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String language = pref.getString("lang", null);
