@@ -128,6 +128,8 @@ public class MovieDetailsActivity extends BaseDrawerActivity implements YouTubeP
                 .into(thumbnail);
 
         youTubePlayerView = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().hide(youTubePlayerView).commit();
         youTubePlayerView.initialize(getString(R.string.youtube_api_key), this);
     }
 
@@ -159,9 +161,8 @@ public class MovieDetailsActivity extends BaseDrawerActivity implements YouTubeP
 
                     if (results != null && results.size() > 0) {
                         player.cueVideo(results.get(0).getKey());
-                    }else{
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().hide(youTubePlayerView).commit();
+                        fragmentManager.beginTransaction().show(youTubePlayerView).commit();
                     }
                 }
 
