@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -59,7 +58,6 @@ public class SettingsActivity extends BaseDrawerActivity {
         }
 
 
-
         langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @SuppressWarnings("deprecation")
             @Override
@@ -73,7 +71,7 @@ public class SettingsActivity extends BaseDrawerActivity {
 
                 Locale locale;
 
-                switch (lang){
+                switch (lang) {
                     case "French":
                     case "Français":
                         editor.putString("lang", "fr-FR").apply();
@@ -91,16 +89,12 @@ public class SettingsActivity extends BaseDrawerActivity {
 
 
                 if (!firstLaunch) {
-                    Toast.makeText(SettingsActivity.this,
-                            parentView.getItemAtPosition(position).toString(),
-                            Toast.LENGTH_SHORT).show();
                     Intent refresh = new Intent(context, SettingsActivity.class);
+                    refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(refresh);
                     finish();
                 }
                 firstLaunch = false;
-
-
             }
 
             @Override
@@ -123,7 +117,6 @@ public class SettingsActivity extends BaseDrawerActivity {
                 editor.putString("quality", quality).apply();
 
 
-
                 if (!firstLaunchQual)
                     Toast.makeText(SettingsActivity.this,
                             parentView.getItemAtPosition(position).toString(),
@@ -140,18 +133,6 @@ public class SettingsActivity extends BaseDrawerActivity {
         });
 
 
-
     }
-
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            startActivity(new Intent(this, MoviesActivity.class));
-        }
-    }
-
 
 }
